@@ -61,7 +61,7 @@ func (list *LinkedList) Prepend(data interface{}) {
 }
 
 func (list *LinkedList) Delete(data interface{}) error {
-	if list.isEmpty() {
+	if list.IsEmpty() {
         return errors.New("List is empty")
     }
 
@@ -99,3 +99,16 @@ func (list *LinkedList) Get(index int) (interface{}, error) {
     return current.data, nil
 }
 
+func (list *LinkedList) Reverse() {
+	var prev *Node
+    current := list.head
+
+    for current != nil {
+        next := current.next
+        current.next = prev
+        prev = current
+        current = next
+    }
+
+    list.head = prev
+}
