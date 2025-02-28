@@ -1,30 +1,30 @@
 package linkedlist
 
 import (
-	"errors"
-	"fmt"
+    "errors"
+    "fmt"
 )
 
-type Node struct {
-    data interface{}
-    next *Node
+type Node[T comparable] struct {
+    data T
+    next *Node[T]
 }
 
-type LinkedList struct {
-    head *Node
+type LinkedList[T comparable] struct {
+    head *Node[T]
     size uint64
 }
 
-func New() *LinkedList {
-	return &LinkedList{}
+func New[T comparable]() *LinkedList[T] {
+    return &LinkedList[T]{}
 }
 
-func (list *LinkedList) Size() uint64 {
-	return list.size
+func (list *LinkedList[T]) Size() uint64 {
+    return list.size
 }
 
-func (list *LinkedList) Append(data interface{}) {
-	newNode := &Node{data: data}
+func (list *LinkedList[T]) Append(data T) {
+    newNode := &Node[T]{data: data}
 
     if list.head == nil {
         list.head = newNode
@@ -35,11 +35,12 @@ func (list *LinkedList) Append(data interface{}) {
         }
         current.next = newNode
     }
+	
     list.size++
 }
 
-func (list *LinkedList) Print() {
-	current := list.head
+func (list *LinkedList[T]) Print() {
+    current := list.head
     fmt.Print("List: ")
 
     for current != nil {
@@ -50,19 +51,19 @@ func (list *LinkedList) Print() {
     fmt.Println("nil")
 }
 
-func (list *LinkedList) IsEmpty() bool {
-	return list.head == nil
+func (list *LinkedList[T]) IsEmpty() bool {
+    return list.head == nil
 }
 
-func (list *LinkedList) Prepend(data interface{}) {
-	newNode := &Node{data: data, next: list.head}
+func (list *LinkedList[T]) Prepend(data T) {
+    newNode := &Node[T]{data: data, next: list.head}
     list.head = newNode
     list.size++
 }
 
-func (list *LinkedList) Delete(data interface{}) error {
-	if list.IsEmpty() {
-        return errors.New("List is empty")
+func (list *LinkedList[T]) Delete(data T) error {
+    if list.IsEmpty() {
+        return errors.New("list is empty")
     }
 
     if list.head.data == data {
@@ -77,18 +78,18 @@ func (list *LinkedList) Delete(data interface{}) error {
     }
 
     if current.next == nil {
-        return errors.New("Element not found")
+        return errors.New("element not found")
     }
 
     current.next = current.next.next
     list.size--
-	
     return nil
 }
 
-func (list *LinkedList) Get(index int) (interface{}, error) {
-	if index < 0 || index >= int(list.size) {
-        return nil, errors.New("Index out of range")
+func (list *LinkedList[T]) Get(index int) (T, error) {
+    var zero T
+    if index < 0 || index >= int(list.size) {
+        return zero, errors.New("index out of range")
     }
 
     current := list.head
@@ -99,8 +100,8 @@ func (list *LinkedList) Get(index int) (interface{}, error) {
     return current.data, nil
 }
 
-func (list *LinkedList) Reverse() {
-	var prev *Node
+func (list *LinkedList[T]) Reverse() {
+    var prev *Node[T]
     current := list.head
 
     for current != nil {
@@ -113,14 +114,14 @@ func (list *LinkedList) Reverse() {
     list.head = prev
 }
 
-func (list *LinkedList) Contains(data interface{}) bool {
-	current := list.head
+func (list *LinkedList[T]) Contains(data T) bool {
+    current := list.head
     for current != nil {
         if current.data == data {
             return true
         }
         current = current.next
     }
-	
+
     return false
 }
