@@ -14,7 +14,9 @@ func New[T comparable]() *Stack[T] {
     return &Stack[T]{data: list.New()}
 }
 
-
+func (s *Stack[T]) Size() uint64 {
+	return s.size
+}
 
 func (s *Stack[T]) Push(data T) {
     s.data.PushFront(data)
