@@ -39,3 +39,12 @@ func (s *Stack[T]) Pop() (T, error) {
 
     return data, nil
 }
+
+func (s *Stack[T]) Peek() (T, error) {
+	var zero T
+    if s.IsEmpty() {
+        return zero, errors.New("stack is empty")
+    }
+
+    return s.data.Front().Value.(T), nil
+}
