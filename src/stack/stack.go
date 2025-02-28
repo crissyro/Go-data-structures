@@ -18,7 +18,24 @@ func (s *Stack[T]) Size() uint64 {
 	return s.size
 }
 
+func (s *Stack[T]) IsEmpty() bool {
+    return s.data.Len() == 0
+}
+
 func (s *Stack[T]) Push(data T) {
     s.data.PushFront(data)
     s.size++
+}
+
+func (s *Stack[T]) Pop() (T, error) {
+	var zero T
+	if s.IsEmpty() {
+        return zero, errors.New("stack is empty")
+    }
+
+    data := s.data.Front().Value.(T)
+    s.data.Remove(s.data.Front())
+    s.size--
+
+    return data, nil
 }
