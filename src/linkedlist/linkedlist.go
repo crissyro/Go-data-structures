@@ -15,3 +15,6 @@ type LinkedList struct {
     size uint64
 }
 
+func New() *LinkedList {
+	return &LinkedList{}
+}
