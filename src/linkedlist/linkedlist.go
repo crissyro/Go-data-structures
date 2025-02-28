@@ -15,11 +15,15 @@ type LinkedList struct {
     size uint64
 }
 
-func new() *LinkedList {
+func New() *LinkedList {
 	return &LinkedList{}
 }
 
-func (list *LinkedList) append(data interface{}) {
+func (list *LinkedList) Size() uint64 {
+	return list.size
+}
+
+func (list *LinkedList) Append(data interface{}) {
 	newNode := &Node{data: data}
 
     if list.head == nil {
@@ -34,7 +38,7 @@ func (list *LinkedList) append(data interface{}) {
     list.size++
 }
 
-func (list *LinkedList) print() {
+func (list *LinkedList) Print() {
 	current := list.head
     fmt.Print("List: ")
 
@@ -46,17 +50,17 @@ func (list *LinkedList) print() {
     fmt.Println("nil")
 }
 
-func (list *LinkedList) isEmpty() bool {
+func (list *LinkedList) IsEmpty() bool {
 	return list.head == nil
 }
 
-func (list *LinkedList) prepend(data interface{}) {
+func (list *LinkedList) Prepend(data interface{}) {
 	newNode := &Node{data: data, next: list.head}
     list.head = newNode
     list.size++
 }
 
-func (list *LinkedList) delete(data interface{}) error {
+func (list *LinkedList) Delete(data interface{}) error {
 	if list.isEmpty() {
         return errors.New("List is empty")
     }
@@ -81,3 +85,17 @@ func (list *LinkedList) delete(data interface{}) error {
 	
     return nil
 }
+
+func (list *LinkedList) Get(index int) (interface{}, error) {
+	if index < 0 || index >= int(list.size) {
+        return nil, errors.New("Index out of range")
+    }
+
+    current := list.head
+    for i := 0; i < index; i++ {
+        current = current.next
+    }
+
+    return current.data, nil
+}
+
