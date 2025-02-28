@@ -112,3 +112,15 @@ func (list *LinkedList) Reverse() {
 
     list.head = prev
 }
+
+func (list *LinkedList) Contains(data interface{}) bool {
+	current := list.head
+    for current != nil {
+        if current.data == data {
+            return true
+        }
+        current = current.next
+    }
+	
+    return false
+}
