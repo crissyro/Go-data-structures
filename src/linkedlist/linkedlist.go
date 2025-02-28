@@ -37,11 +37,17 @@ func (list *LinkedList) append(data interface{}) {
 func (list *LinkedList) print() {
 	current := list.head
     fmt.Print("List: ")
+
     for current != nil {
         fmt.Printf("%v -> ", current.data)
         current = current.next
     }
+
     fmt.Println("nil")
+}
+
+func (list *LinkedList) isEmpty() bool {
+	return list.head == nil
 }
 
 func (list *LinkedList) prepend(data interface{}) {
@@ -51,7 +57,7 @@ func (list *LinkedList) prepend(data interface{}) {
 }
 
 func (list *LinkedList) delete(data interface{}) error {
-	if list.head == nil {
+	if list.isEmpty() {
         return errors.New("List is empty")
     }
 
@@ -72,5 +78,6 @@ func (list *LinkedList) delete(data interface{}) error {
 
     current.next = current.next.next
     list.size--
+	
     return nil
 }
