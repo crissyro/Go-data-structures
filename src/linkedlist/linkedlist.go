@@ -15,6 +15,21 @@ type LinkedList struct {
     size uint64
 }
 
-func New() *LinkedList {
+func new() *LinkedList {
 	return &LinkedList{}
+}
+
+func (list *LinkedList) append(data interface{}) {
+	newNode := &Node{data: data}
+	
+    if list.head == nil {
+        list.head = newNode
+    } else {
+        current := list.head
+        for current.next != nil {
+            current = current.next
+        }
+        current.next = newNode
+    }
+    list.size++
 }
