@@ -48,3 +48,4 @@ func (s *Stack[T]) Peek() (T, error) {
 
     return s.data.Front().Value.(T), nil
 }
+
