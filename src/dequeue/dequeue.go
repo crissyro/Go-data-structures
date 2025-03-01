@@ -10,3 +10,7 @@ type Dequeue[T comparable] struct {
     size uint64
 }
 
+func New[T comparable]() *Dequeue[T] {
+    return &Dequeue[T]{data: list.New()}
+}
+
