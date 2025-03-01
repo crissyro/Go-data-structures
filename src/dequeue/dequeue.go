@@ -30,3 +30,13 @@ func (d *Dequeue[T]) Front() (T, error) {
 
     return d.data.Front().Value.(T), nil
 }
+
+func (d *Dequeue[T]) Rear() (T, error) {
+	var zero T
+    if d.IsEmpty() {
+        return zero, errors.New("dequeue is empty")
+    }
+
+    return d.data.Back().Value.(T), nil
+}
+
