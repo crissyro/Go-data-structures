@@ -22,3 +22,9 @@ func (q *Queue[T]) IsEmpty() bool {
     return q.data.Len() == 0
 }
 
+func (q *Queue[T]) Enqueue(data T) {
+    q.data.PushBack(data)
+    q.size++
+}
+
+
