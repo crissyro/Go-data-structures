@@ -27,4 +27,15 @@ func (q *Queue[T]) Enqueue(data T) {
     q.size++
 }
 
+func (q *Queue[T]) Dequeue() (T, error) {
+	var zero T
+    if q.IsEmpty() {
+        return zero, errors.New("queue is empty")
+    }
 
+    data := q.data.Front().Value.(T)
+    q.data.Remove(q.data.Front())
+    q.size--
+
+    return data, nil
+}
