@@ -18,3 +18,7 @@ func (d *Dequeue[T]) Size() uint64 {
     return d.size
 }
 
+func (d *Dequeue[T]) IsEmpty() bool {
+    return d.data.Len() == 0
+}
+
