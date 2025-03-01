@@ -14,3 +14,7 @@ func New[T comparable]() *Dequeue[T] {
     return &Dequeue[T]{data: list.New()}
 }
 
+func (d *Dequeue[T]) Size() uint64 {
+    return d.size
+}
+
