@@ -17,3 +17,8 @@ func New[T comparable]() *Queue[T] {
 func (q *Queue[T]) Size() uint64 {
     return q.size
 }
+
+func (q *Queue[T]) IsEmpty() bool {
+    return q.data.Len() == 0
+}
+
