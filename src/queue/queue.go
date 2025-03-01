@@ -14,3 +14,6 @@ func New[T comparable]() *Queue[T] {
     return &Queue[T]{data: list.New()}
 }
 
+func (q *Queue[T]) Size() uint64 {
+    return q.size
+}
