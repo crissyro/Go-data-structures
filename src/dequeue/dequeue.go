@@ -22,3 +22,11 @@ func (d *Dequeue[T]) IsEmpty() bool {
     return d.data.Len() == 0
 }
 
+func (d *Dequeue[T]) Front() (T, error) {
+	var zero T
+    if d.IsEmpty() {
+        return zero, errors.New("dequeue is empty")
+    }
+
+    return d.data.Front().Value.(T), nil
+}
