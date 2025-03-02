@@ -40,3 +40,13 @@ func (d *Dequeue[T]) Rear() (T, error) {
     return d.data.Back().Value.(T), nil
 }
 
+func (d *Dequeue[T]) EnqueueFront(data T) {
+    d.data.PushFront(data)
+    d.size++
+}
+
+func (d *Dequeue[T]) EnqueueRear(data T) {
+    d.data.PushBack(data)
+    d.size++
+}
+
