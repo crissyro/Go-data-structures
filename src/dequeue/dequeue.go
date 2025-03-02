@@ -50,3 +50,16 @@ func (d *Dequeue[T]) EnqueueRear(data T) {
     d.size++
 }
 
+func (d *Dequeue[T]) DequeueFront() (T, error) {
+    var zero T
+    if d.IsEmpty() {
+        return zero, errors.New("dequeue is empty")
+    }
+
+    data := d.data.Front().Value.(T)
+    d.data.Remove(d.data.Front())
+    d.size--
+
+    return data, nil
+}
+
