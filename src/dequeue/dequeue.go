@@ -63,3 +63,15 @@ func (d *Dequeue[T]) DequeueFront() (T, error) {
     return data, nil
 }
 
+func (d *Dequeue[T]) DequeueRear() (T, error) {
+    var zero T
+    if d.IsEmpty() {
+        return zero, errors.New("dequeue is empty")
+    }
+
+    data := d.data.Back().Value.(T)
+    d.data.Remove(d.data.Back())
+    d.size--
+
+    return data, nil
+}
