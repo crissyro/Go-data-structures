@@ -23,6 +23,18 @@ func (list *LinkedList[T]) Size() uint64 {
     return list.size
 }
 
+func (list *LinkedList[T]) Head() *Node[T] {
+    return list.head
+}
+
+func (list *LinkedList[T]) Next() *Node[T] {
+    if list.head == nil {
+        return nil
+    }
+
+    return list.head.next
+}
+
 func (list *LinkedList[T]) Append(data T) {
     newNode := &Node[T]{data: data}
 
