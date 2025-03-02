@@ -75,3 +75,15 @@ func (d *Dequeue[T]) DequeueRear() (T, error) {
 
     return data, nil
 }
+
+func (d *Dequeue[T]) Rotate(k int) error {
+    if d.IsEmpty() || k <= 0 || k > int(d.size) {
+        return errors.New("invalid rotation value")
+    }
+
+    for i := 0; i < k; i++ {
+        d.data.MoveToBack(d.data.Front())
+    }
+
+    return nil
+}
