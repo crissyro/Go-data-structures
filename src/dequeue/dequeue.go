@@ -87,3 +87,10 @@ func (d *Dequeue[T]) Rotate(k int) error {
 
     return nil
 }
+
+func (d *Dequeue[T]) Reverse() {
+    d.data.Init()
+    for e := d.data.Front(); e != nil; e = e.Next() {
+        d.data.PushBack(e.Value)
+    }
+}
